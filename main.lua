@@ -111,35 +111,3 @@ v:Destroy() else return end
 
     end
 })
-
-local Tab = Window:Tab({
-    Title = "Universal",
-    Icon = "lucide:layers",
-})
-
-local InfJumpButton = Tab:Button({
-    Title = "infinite jump",
-    Desc = "permanent!",
-    Icon = "lucide:circle-arrow-up",
-    Callback = function()
--- Infinite Jump Script (LocalScript)
-local Players = game:GetService("Players")
-local UserInputService = game:GetService("UserInputService")
-
-local player = Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoid = character:WaitForChild("Humanoid")
-
--- Optional: Adjust jump height/power here
-humanoid.JumpPower = 50  -- Default is usually around 50
-
-UserInputService.JumpRequest:Connect(function()
-    humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-end)
-
--- Handle character respawn
-player.CharacterAdded:Connect(function(newChar)
-    character = newChar
-    humanoid = newChar:WaitForChild("Humanoid")
-    humanoid.JumpPower = 50
-end)
